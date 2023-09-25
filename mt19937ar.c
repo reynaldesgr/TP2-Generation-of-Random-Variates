@@ -337,8 +337,14 @@ int main(void)
     double * HDLcumulProbabilities = calculateCumulativeProbabilities(HDLproba, 6);
     displayArray(HDLcumulProbabilities, 6);
 
-    printf("\n -- HDL Simulation -- \n");
+    printf("\n -- HDL Simulation (Sample = 1000) -- \n");
     for (int i = 0; i < 1000; i++){
+            double individualPSR = randomIndividual();
+        simulateHDLClass(HDLcumulProbabilities, individualPSR, 6);
+    }
+
+    printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
+    for (int i = 0; i < 1000000; i++){
             double individualPSR = randomIndividual();
         simulateHDLClass(HDLcumulProbabilities, individualPSR, 6);
     }
