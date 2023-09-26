@@ -54,7 +54,7 @@ int main(void)
     }
     displayClass(HDLSimulation, 6);*/
 
-    printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
+    //printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
     /*for (int i = 0; i < 1000000; i++)
     {
         double individualPSR = randomIndividual();
