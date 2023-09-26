@@ -12,14 +12,15 @@ double randomIndividual();
 void boxMuller(double * x1, double * x2);
 double genericRejectionBM(double * x1, double * x2, double minX, double maxX, double minY, double maxY);
 
-
-double f(double x);
-
 // Simulation
 void simulateClasses_1();
 void simulateClassesBound(double a, double b, int sizeSample, int drawings, int numberClasses);
 int  simulateHDLClass(const double * cumulativeArray, double individualPSR);
 void simulateRoll20DiceSum();
 double roll20Dice();
+
+
+// Utility
+void accumulateClass(int * t, double x);
 
 #endif

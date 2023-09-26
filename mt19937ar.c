@@ -7,6 +7,10 @@
 
 /* Personnal adding */
 
+#define NUM_SAMPLES 10000 
+#define MIN_X -1.0
+#define MAX_X 1.0
+
 /* Testing functions */
 
 void test_uniform(double a, double b)
@@ -30,7 +34,7 @@ int main(void)
     //test_empirical_distributions();
     
     // HDL Probabilities
-    printf("\n -- HDL Probabilities calculation -- \n");
+    //printf("\n -- HDL Probabilities calculation -- \n");
     /*const double HDLarray[6] = {100, 400, 600, 400, 100, 200};
     double * HDLproba        = calculateProbabilities(HDLarray, 6, 1800);
     displayArray(HDLproba, 6);
@@ -106,15 +110,28 @@ int main(void)
     //simulateRoll20DiceSum();
 
     // Box-Muller
-
-    int test20binsBM[20] = {0};
-    int index1, index2;
-    double x1, x2;
-
-    /*for (int i = 0; i < 10000; i++)
-    {
-        genericRejectionBM(&x1, &x2, -1, 1, -1, 1);
-        printf("%f, %f \n", x1, x2);
-    }*/
     
+    int     index1;
+    int     index2;
+    int     bin;
+    double  x1;
+    double  x2;
+
+    int histogram20bin[NUM_BINS] = {0};
+    
+    for (int i = 0; i < NUM_SAMPLES; i++) {
+        genericRejectionBM(&x1, &x2, -1, 1, -1, 1);
+        bin = (int)((x1 - MIN_X) / ((MAX_X - MIN_X) / NUM_BINS));
+        if (bin >= 0 && bin < NUM_BINS) 
+        {
+            histogram20bin[bin]++;
+        }
+    }
+    for (int i = 0; i < NUM_BINS; i++) 
+    {
+        double binStart = MIN_X    + i * ((MAX_X - MIN_X) / NUM_BINS);
+        double binEnd   = binStart + ((MAX_X - MIN_X) / NUM_BINS);
+        printf("[%0.2f, %0.2f[: %d\n", binStart, binEnd, histogram20bin[i]);
+    }
+
 }

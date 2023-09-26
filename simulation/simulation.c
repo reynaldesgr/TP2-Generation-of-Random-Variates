@@ -48,10 +48,6 @@ void boxMuller(double * x1, double * x2)
     *x2       = sin(2 * M_PI * rn2) * (sqrt(-2 *log(rn1)));
 }
 
-double f(double x)
-{
-    return exp(-x);
-}
 
 double genericRejectionBM(double * x1, double * x2, double minX, double maxX, double minY, double maxY)
 {
@@ -59,6 +55,8 @@ double genericRejectionBM(double * x1, double * x2, double minX, double maxX, do
         boxMuller(x1, x2);
     }while (*x1 < minX | *x1 > maxX | *x2 > maxY | *x2 < minY);
 }
+
+
 
 double randomIndividual()
 {
@@ -153,7 +151,7 @@ void simulateRoll20DiceSum()
         }
 
         // Update the running total and sum of squares
-        sum += experiment_sum;
+        sum            += experiment_sum;
         sum_of_squares += experiment_sum * experiment_sum;
 
         // Update the histogram based on the experiment sum
@@ -161,9 +159,9 @@ void simulateRoll20DiceSum()
     }
 
     // Calculate the average and standard deviation
-    double average = (double)sum / NUM_SIMULATIONS;
-    double variance = (sum_of_squares / NUM_SIMULATIONS) - (average * average);
-    double std_deviation = sqrt(variance);
+    double average          =  (double)sum      / NUM_SIMULATIONS;
+    double variance         = (sum_of_squares / NUM_SIMULATIONS) - (average * average);
+    double std_deviation    = sqrt(variance);
 
     printf("Average: %.2lf\n", average);
     printf("Standard Deviation: %.2lf\n", std_deviation);
@@ -172,3 +170,6 @@ void simulateRoll20DiceSum()
         printf("%d-%d: %d\n", i, i+1, histogram[i]);
     }*/
 }
+
+
+
