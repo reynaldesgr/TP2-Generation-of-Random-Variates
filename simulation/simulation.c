@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../mt/matsumoto.h"
+#include "simulation.h"
+#include "../imath/math_utility.h"
 #include "../display/display_utility.h"
+#include "../mt/matsumoto.h"
 
 /**
  * @brief This function return a pseudo-random number between a and b : [a, b]
@@ -31,8 +33,31 @@ double uniform(double a, double b)
 
 double negExp(double mean)
 {
-    double r = (double) rand() / ((double) RAND_MAX + 1); // Utilisation de RAND_MAX + 1 pour exclure 1
+    double r = genrand_real2(); // genrand_real2 to avoid 1
     return -mean * log(1.0 - r);
+}
+
+
+void boxMuller(double * x1, double * x2)
+{
+    // Calculation of rn1 and rn2 : random numbers
+    double rn1 = genrand_real1();
+    double rn2 = genrand_real1();
+
+    *x1       = cos(2 * M_PI * rn2) * (sqrt(-2 *log(rn1)));
+    *x2       = sin(2 * M_PI * rn2) * (sqrt(-2 *log(rn1)));
+}
+
+double f(double x)
+{
+    return exp(-x);
+}
+
+double genericRejectionBM(double * x1, double * x2, double minX, double maxX, double minY, double maxY)
+{
+    do{
+        boxMuller(x1, x2);
+    }while (*x1 < minX | *x1 > maxX | *x2 > maxY | *x2 < minY);
 }
 
 double randomIndividual()
@@ -108,4 +133,42 @@ int simulateHDLClass(const double * cumulativeArray, double individualPSR)
     }
     return i; 
    //printf("\n HDL Results : individual is class %d with a psr at %f. \n", i+1, individualPSR);
+}
+
+void simulateRoll20DiceSum()
+{
+    int sum                     = 0;
+    double sum_of_squares       = 0.0;
+
+    int histogram[NUM_BINS]  = {0};
+
+    // Simulate the experiment 'NUM_SIMULATIONS' times
+    for (int i = 0; i < NUM_SIMULATIONS; i++) {
+        int experiment_sum = 0;
+
+        // Roll the dice 'NUM_ROLLS' times and calculate the sum
+        for (int j = 0; j < NUM_ROLLS; j++) {
+            int roll = uniform(1,6); // Generate a random number between 1 and 6
+            experiment_sum += roll;
+        }
+
+        // Update the running total and sum of squares
+        sum += experiment_sum;
+        sum_of_squares += experiment_sum * experiment_sum;
+
+        // Update the histogram based on the experiment sum
+        histogram[experiment_sum]++;
+    }
+
+    // Calculate the average and standard deviation
+    double average = (double)sum / NUM_SIMULATIONS;
+    double variance = (sum_of_squares / NUM_SIMULATIONS) - (average * average);
+    double std_deviation = sqrt(variance);
+
+    printf("Average: %.2lf\n", average);
+    printf("Standard Deviation: %.2lf\n", std_deviation);
+
+    /*for (int i = 20; i < 120; i++) {
+        printf("%d-%d: %d\n", i, i+1, histogram[i]);
+    }*/
 }
