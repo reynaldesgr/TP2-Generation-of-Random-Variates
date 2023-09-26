@@ -34,37 +34,42 @@ int main(void)
     //test_empirical_distributions();
     
     // HDL Probabilities
-    //printf("\n -- HDL Probabilities calculation -- \n");
-    /*const double HDLarray[6] = {100, 400, 600, 400, 100, 200};
-    double * HDLproba        = calculateProbabilities(HDLarray, 6, 1800);
+    double HDLcumulProbabilities[6];
+    double HDLproba[6];
+
+    printf("\n -- HDL Probabilities calculation -- \n");
+    const double HDLarray[6] = {100, 400, 600, 400, 100, 200};
+    calculateProbabilities(HDLarray, HDLproba, 6, 1800);
     displayArray(HDLproba, 6);
 
 
     // HDL Cumulatives Probabilities
     printf("\n -- HDL Cumulatives Probabilities calculation -- \n");
-    double * HDLcumulProbabilities = calculateCumulativeProbabilities(HDLproba, 6);
+    calculateCumulativeProbabilities(HDLproba, HDLcumulProbabilities, 6);
     displayArray(HDLcumulProbabilities, 6);
 
     // HDL Simulation
     printf("\n -- HDL Simulation (Sample = 1000) -- \n");
-    //int individualClass = 0;
-    //int HDLSimulation[6] = {0};
+    double individualPSR;
+    int individualClass = 0;
+    int HDLSimulation[6] = {0};
 
     /*for (int i = 0; i < 1000; i++)
     {
-        double individualPSR = randomIndividual();
+        individualPSR = randomIndividual();
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
         HDLSimulation[individualClass]++;
     }
     displayClass(HDLSimulation, 6);*/
 
-    //printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
-    /*for (int i = 0; i < 1000000; i++)
+    printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
+    for (int i = 0; i < 1000000; i++)
     {
-        double individualPSR = randomIndividual();
-        simulateHDLClass(HDLcumulProbabilities, individualPSR);
+        individualPSR = randomIndividual();
+        individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
+        HDLSimulation[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);*/
+    displayClass(HDLSimulation, 6);
 
 
     // 4 - Reproduction of continuous distributions
@@ -111,7 +116,7 @@ int main(void)
 
     // Box-Muller
     
-    int     index1;
+    /*int     index1;
     int     index2;
     int     bin;
     double  x1;
@@ -132,6 +137,6 @@ int main(void)
         double binStart = MIN_X    + i * ((MAX_X - MIN_X) / NUM_BINS);
         double binEnd   = binStart + ((MAX_X - MIN_X) / NUM_BINS);
         printf("[%0.2f, %0.2f[: %d\n", binStart, binEnd, histogram20bin[i]);
-    }
+    }*/
 
 }

@@ -4,8 +4,6 @@
 
 #define M_PI (3.14159265358979323846)
 
-
-double * calculateProbabilities(const double * array, int size, int sizeSample);
-double * calculateCumulativeProbabilities(const double * probaArray, int size);
-
+void calculateProbabilities(const double * array, double * proba, int size, int sizeSample);
+void calculateCumulativeProbabilities(const double * probaArray, double * cumulativeArray, int size);
 #endif
