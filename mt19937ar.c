@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mt/matsumoto.h"
 #include "simulation/simulation.h"
 #include "imath/math_utility.h"
 #include "display/display_utility.h"
@@ -21,6 +22,9 @@ void test_empirical_distributions()
 
 int main(void)
 {
+    // 1 - Matsumoto
+    matsumoto_main();
+
     // 2 - Generation of uniform random numbers between A and B
     test_uniform(-89.2, 56.7);
     
