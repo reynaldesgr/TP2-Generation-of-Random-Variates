@@ -5,12 +5,6 @@
 #include "imath/math_utility.h"
 #include "display/display_utility.h"
 
-/* Personnal adding */
-
-#define NUM_SAMPLES 10000 
-#define MIN_X -1.0
-#define MAX_X 1.0
-
 /* Testing functions */
 
 void test_uniform(double a, double b)
@@ -28,10 +22,10 @@ void test_empirical_distributions()
 int main(void)
 {
     // 2 - Generation of uniform random numbers between A and B
-    //test_uniform(-89.2, 56.7);
+    test_uniform(-89.2, 56.7);
     
     // 3 - Reproduction of discrete empirical distributions
-    //test_empirical_distributions();
+    test_empirical_distributions();
     
     // HDL Probabilities
     double HDLcumulProbabilities[6];
@@ -54,13 +48,13 @@ int main(void)
     int individualClass = 0;
     int HDLSimulation[6] = {0};
 
-    /*for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000; i++)
     {
         individualPSR = randomIndividual();
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
         HDLSimulation[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);*/
+    displayClass(HDLSimulation, 6);
 
     printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
     for (int i = 0; i < 1000000; i++)
@@ -73,7 +67,7 @@ int main(void)
 
 
     // 4 - Reproduction of continuous distributions
-    /*double r;
+    double r;
 
     double mean = 10;
     double sum  = 0;
@@ -90,53 +84,31 @@ int main(void)
 
     printf("\n * Average \t : %f \n", sum/100);
 
-    sum = 0;*/
+    sum = 0;
 
     //printf("\n -- NegExp (Drawing = 1000 000) -- \n");
     
-    /*for (int i = 0; i < 1000000; i++)
+    for (int i = 0; i < 1000000; i++)
     {
         r = negExp(mean);
         sum+=r;
         test20bins[(int) r]++;
-    }*/
+    }
     
     // This come close to the mean = 11
-    //printf("\n * Average \t : %f \n", sum/1000000);
+    printf("\n * Average \t : %f \n", sum/1000000);
 
     // Discrete Distribution
-    /*printf(" \n -- Checking discrete distribution -- \n");
+    printf(" \n -- Checking discrete distribution -- \n");
 
     for (int i = 0; i < 20; i++)
     {
         printf("%d-%d \t: %d \n", i, i+1, test20bins[i]);
-    }*/
+    }
 
-    //simulateRoll20DiceSum();
+    // Gaussian distribution with a common dice (drawing 20 times)
+    simulateRoll20DiceSum();
 
     // Box-Muller
-    
-    /*int     index1;
-    int     index2;
-    int     bin;
-    double  x1;
-    double  x2;
-
-    int histogram20bin[NUM_BINS] = {0};
-    
-    for (int i = 0; i < NUM_SAMPLES; i++) {
-        genericRejectionBM(&x1, &x2, -1, 1, -1, 1);
-        bin = (int)((x1 - MIN_X) / ((MAX_X - MIN_X) / NUM_BINS));
-        if (bin >= 0 && bin < NUM_BINS) 
-        {
-            histogram20bin[bin]++;
-        }
-    }
-    for (int i = 0; i < NUM_BINS; i++) 
-    {
-        double binStart = MIN_X    + i * ((MAX_X - MIN_X) / NUM_BINS);
-        double binEnd   = binStart + ((MAX_X - MIN_X) / NUM_BINS);
-        printf("[%0.2f, %0.2f[: %d\n", binStart, binEnd, histogram20bin[i]);
-    }*/
-
+    simulateBMDistribution();
 }
