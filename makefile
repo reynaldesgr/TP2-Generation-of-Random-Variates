@@ -35,7 +35,7 @@ SIMULATION_DEPS = $(SIMULATION_OBJS:.o=.d)
 all: $(EXEC)
 
 $(EXEC): $(OBJS) $(DISPLAY_OBJS) $(IMATH_OBJS) $(MT_OBJS) $(SIMULATION_OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ -lm
 
 -include $(DEPS)
 -include $(DISPLAY_DEPS)
