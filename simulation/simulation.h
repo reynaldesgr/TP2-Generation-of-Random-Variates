@@ -14,20 +14,18 @@
 #define MAX_Y 1.0
 
 // Randomess
-double uniform(double a, double b);
-double negExp(double mean);
-double randomIndividual();
-void boxMuller(double * x1, double * x2);
-double genericRejectionBM(double * x1, double * x2, double minX, double maxX, double minY, double maxY);
+double uniform                  (double a, double b);
+double negExp                   (double mean);
+double randomIndividual         (void);
+void   boxMuller                (double * x1, double * x2);
+double genericRejectionBM       (double * x1, double * x2, double minX, double maxX, double minY, double maxY);
 
 // Simulation
-void simulateClasses_1();
-void simulateClassesBound(double a, double b, int sizeSample, int drawings, int numberClasses);
-int  simulateHDLClass(const double * cumulativeArray, double individualPSR);
-void simulateRoll20DiceSum();
-void simulateBMDistribution();
+void   simulateClasses_1          (void);
+void   simulateClassesBound       (double a, double b, int sizeSample, int drawings, int numberClasses);
+int    simulateHDLClass           (const double * cumulativeArray, double individualPSR);
+void   simulateRoll20DiceSum      (void);
+void   simulateBMDistribution     (void);
 
-// Utility
-void accumulateClass(int * t, double x);
 
 #endif

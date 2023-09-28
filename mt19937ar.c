@@ -8,10 +8,28 @@
 
 /* Testing functions */
 
-void test_uniform(double a, double b)
+void test_uniform(double a, double b, int sample)
 {
+    // Sample = 100000
+    double mean;
+    double array[sample];
+    int    size;
+
+    size = (int) (b - a);
+
+    int histogram[size];
+    int bins = 10;
+
     printf("\n -- Test uniform --\n");
-    printf("Resultat : %.4f \n", uniform(a, b));
+    for (int i = 0; i < sample; i++)
+    {
+        array[i] = uniform(a, b);
+    }
+
+    createHistogram(a, b, bins, histogram, array, sample);
+    mean = calculateMeanInt(histogram, bins);
+    printf("\nStandard deviation for generated values by uniform() : %f \n", calculateStandardDeviationInt(histogram, bins, mean));
+
 }
 
 void test_empirical_distributions()
@@ -22,11 +40,12 @@ void test_empirical_distributions()
 
 int main(void)
 {
+    
     // 1 - Matsumoto
-    matsumoto_main();
+    //matsumoto_main();
 
     // 2 - Generation of uniform random numbers between A and B
-    test_uniform(-89.2, 56.7);
+    //test_uniform(-89.2, 56.7, 100000);
     
     // 3 - Reproduction of discrete empirical distributions
     test_empirical_distributions();
@@ -69,7 +88,7 @@ int main(void)
     }
     displayClass(HDLSimulation, 6);
 
-
+    /*
     // 4 - Reproduction of continuous distributions
     double r;
 
@@ -109,10 +128,11 @@ int main(void)
     {
         printf("%d-%d \t: %d \n", i, i+1, test20bins[i]);
     }
-
+    
     // Gaussian distribution with a common dice (drawing 20 times)
     simulateRoll20DiceSum();
 
     // Box-Muller
-    simulateBMDistribution();
+    simulateBMDistribution();*/
+    
 }

@@ -141,25 +141,6 @@ void simulateClasses_1()
     displayArray(array, 3);
 }
 
-/*void simulateClassesBound(double a, double b, int sizeSample, int drawings, int numberClasses)
-{
-    int    i;
-    double individual;
-
-    double array[numberClasses];
-
-    if (array)
-    {
-        for (i = 0; i <= drawings; i++)
-        {
-            individual = uniform(a, b);
-            array[(int) (individual - a) / sizeSample]++;
-            //printf("%f : %d \n", individual, (int) (individual - a) / sizeSample);
-        }  
-    }
-    displayArray(array, sizeSample);
-}*/
-
 
 /**
  * @brief This function simulate a PSR result of a individual 
@@ -188,42 +169,25 @@ int simulateHDLClass(const double * cumulativeArray, double individualPSR)
 
 void simulateRoll20DiceSum()
 {
-    int sum                     = 0;
-    double sum_of_squares       = 0.0;
+    int roll;
+    int sum                             = 0;
+    double sum_of_squares               = 0.0;
 
-    int histogram[NUM_BINS]  = {0};
+    int    histogram [NUM_BINS]         = {0};
+    double valuesDice[NUM_SIMULATIONS];
 
     // Simulate the experiment 'NUM_SIMULATIONS' times
-    for (int i = 0; i < NUM_SIMULATIONS; i++) {
-        int experiment_sum = 0;
-
-        // Roll the dice 'NUM_ROLLS' times and calculate the sum
-        for (int j = 0; j < NUM_ROLLS; j++) {
-            int roll = uniform(1,6); // Generate a random number between 1 and 6
-            experiment_sum += roll;
-        }
-
-        // Update the running total and sum of squares
-        sum            += experiment_sum;
-        sum_of_squares += experiment_sum * experiment_sum;
-
-        // Update the histogram based on the experiment sum
-        histogram[experiment_sum]++;
+    for (int i = 0; i < NUM_SIMULATIONS; i++) 
+    {
+        valuesDice[i] = uniform(1, 6);
     }
 
-    // Calculate the average and standard deviation
-    double mean             = (double) sum / NUM_SIMULATIONS;
-    double variance         = (sum_of_squares / NUM_SIMULATIONS) - (mean * mean);
-    double std_deviation    = sqrt(variance);
-
-    printf("\n Average: %.2lf\n", mean);
-    printf("\n Standard Deviation: %.2lf\n", std_deviation);
+    createHistogram(1, 6, 5, histogram, valuesDice, NUM_SIMULATIONS);
 }
 
 /**
  * @brief This function test NUM_SIMULATION times the Box Muller function 
- * to generate numbers around 0 following N(0,1). It also display the average
- * and the standard deviation of a generated distribution. 
+ * to generate numbers around 0 following N(0,1). 
 */
 
 void simulateBMDistribution()
@@ -236,32 +200,16 @@ void simulateBMDistribution()
     double  x2;
 
     double meanBM = 0.;
-
-    int         histogram20bin[NUM_BINS]            = {0};
+    int         histogram     [NUM_BINS];
     double      valuesBM      [NUM_SIMULATIONS];
     
     for (int i = 0; i < NUM_SIMULATIONS; i++) {
         genericRejectionBM(&x1, &x2, -1, 1, -1, 1);
-
-        binx1 = (int)((x1 - MIN_X) / ((MAX_X - MIN_X) / NUM_BINS));
-
-        if (binx1 >= 0 && binx1 < NUM_BINS) 
-        {
-            histogram20bin[binx1]++;
-        }
         valuesBM[i] = x1;
-        meanBM      +=x1;
     }
 
-    for (int i = 0; i < NUM_BINS; i++) 
-    {
-        double binStart = MIN_X    + i * ((MAX_X - MIN_X) / NUM_BINS);
-        double binEnd   = binStart + ((MAX_X - MIN_X) / NUM_BINS);
-        printf("[%0.2f, %0.2f[: %d\n", binStart, binEnd, histogram20bin[i]);
-    }
+    createHistogram(MIN_X, MAX_X, NUM_BINS, histogram, valuesBM, NUM_SIMULATIONS);
 
-    printf("\n * Average \t : %f \n", meanBM / NUM_SIMULATIONS);
-    printf("\n * Standard deviation \t : %.2f \n", calculateStandardDeviation(valuesBM, NUM_SIMULATIONS, meanBM));
 }
 
 

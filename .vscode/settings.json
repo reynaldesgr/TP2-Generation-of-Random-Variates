@@ -55,5 +55,9 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "makefile.compileCommandsPath": ""
+  "makefile.compileCommandsPath": "",
+  "C_Cpp.errorSquiggles": "disabled",
+  "files.associations": {
+    "cmath": "c"
+  }
 }

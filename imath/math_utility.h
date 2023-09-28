@@ -2,9 +2,13 @@
 #define __MATH_UTILITY__
 
 
-#define M_PI (3.14159265358979323846)
-
+double calculateMean                    (double * array, int size);
+double calculateMeanInt                 (int * array, int size);
 double calculateStandardDeviation       (const double * array, int size, double mean);
+double calculateStandardDeviationInt    (const int * array, int size, double mean);
 void   calculateProbabilities           (const double * array, double * proba, int size, int sizeSample);
 void   calculateCumulativeProbabilities (const double * probaArray, double * cumulativeArray, int size);
+
+void createHistogram                    (double a, double b, int bins, int * histogram, double * data, int sample);
+
 #endif
