@@ -49,9 +49,9 @@ int main(void)
     
     // 3 - Reproduction of discrete empirical distributions
     //test_empirical_distributions();
-    /*
+    
     // HDL Probabilities
-    double HDLcumulProbabilities[6];
+    /*double HDLcumulProbabilities[6];
     double HDLproba[6];
 
     printf("\n -- HDL Probabilities calculation -- \n");
@@ -90,49 +90,43 @@ int main(void)
 
 
     // 4 - Reproduction of continuous distributions
-    /*double r;
+    double r;
 
-    double mean = 10;
+    double mean = 11;
     double sum  = 0;
 
-    int test20bins[20] = {0};
+    int test20bins1    [20] = {0};
+    double dataNegExp1 [1000];
 
-    printf("\n -- NegExp (Drawing = 100) -- \n");
-    for (int i = 0; i < 100; i++)
+    printf("\n -- NegExp (Drawing = 1000) -- \n");
+    for (int i = 0; i < 1000; i++)
     {
-        r = negExp(mean);
-        sum+=r;
-        test20bins[(int) r]++;
+        r              = negExp(mean);
+        dataNegExp1[i] = r;
     }
 
-    printf("\n * Average \t : %f \n", sum/100);
-
-    sum = 0;
-
-    //printf("\n -- NegExp (Drawing = 1000 000) -- \n");
+    createHistogram(0, 20, 20, test20bins1, dataNegExp1, 1000);
     
+    printf("\n -- Average (Drawing = 1000) : %f \n", calculateMean(dataNegExp1, 1000));
+
+    /*int test20bins2    [20] = {0};
+    double dataNegExp2 [1000000];
+
+    printf("\n -- NegExp (Drawing = 1000000) -- \n");
     for (int i = 0; i < 1000000; i++)
     {
-        r = negExp(mean);
-        sum+=r;
-        test20bins[(int) r]++;
+        r              = negExp(mean);
+        dataNegExp2[i] = r;
     }
+
+    createHistogram(0, 20, 20, test20bins2, dataNegExp2, 1000000);
     
-    // This come close to the mean = 11
-    printf("\n * Average \t : %f \n", sum/1000000);
-
-    // Discrete Distribution
-    printf(" \n -- Checking discrete distribution -- \n");
-
-    for (int i = 0; i < 20; i++)
-    {
-        printf("%d-%d \t: %d \n", i, i+1, test20bins[i]);
-    }*/
+    printf("\n -- Average (Drawing = 1000000) : %f \n", calculateMean(dataNegExp2, 1000000));*/
     
     // Gaussian distribution with a common dice (drawing 20 times then sum)
     //simulateRoll20DiceSum();
 
     // Box-Muller
-    //simulateBMDistribution();
+    //simulateBMDistribution();*/
     
 }
