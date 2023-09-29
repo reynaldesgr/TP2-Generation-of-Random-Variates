@@ -170,6 +170,8 @@ int simulateHDLClass(const double * cumulativeArray, double individualPSR)
 void simulateRoll20DiceSum()
 {
     int roll;
+    int face;
+
     int sum                             = 0;
     double sum_of_squares               = 0.0;
 
@@ -179,10 +181,17 @@ void simulateRoll20DiceSum()
     // Simulate the experiment 'NUM_SIMULATIONS' times
     for (int i = 0; i < NUM_SIMULATIONS; i++) 
     {
-        valuesDice[i] = uniform(1, 6);
+        // Sum 'NUM_ROLLS' times the faces obtained
+        for (int i = 0; i < NUM_ROLLS; i++)
+        {
+            face = uniform(1, 6);
+            sum+=face;
+        }
+        valuesDice[i] = sum;
+        sum           = 0;
     }
 
-    createHistogram(1, 6, 5, histogram, valuesDice, NUM_SIMULATIONS);
+    createHistogram(20, 120, 50, histogram, valuesDice, NUM_SIMULATIONS);
 }
 
 /**

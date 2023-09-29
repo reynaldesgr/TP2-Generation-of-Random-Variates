@@ -48,8 +48,8 @@ int main(void)
     //test_uniform(-89.2, 56.7, 100000);
     
     // 3 - Reproduction of discrete empirical distributions
-    test_empirical_distributions();
-    
+    //test_empirical_distributions();
+    /*
     // HDL Probabilities
     double HDLcumulProbabilities[6];
     double HDLproba[6];
@@ -86,11 +86,11 @@ int main(void)
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
         HDLSimulation[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);
+    displayClass(HDLSimulation, 6);*/
 
-    /*
+
     // 4 - Reproduction of continuous distributions
-    double r;
+    /*double r;
 
     double mean = 10;
     double sum  = 0;
@@ -127,12 +127,12 @@ int main(void)
     for (int i = 0; i < 20; i++)
     {
         printf("%d-%d \t: %d \n", i, i+1, test20bins[i]);
-    }
+    }*/
     
-    // Gaussian distribution with a common dice (drawing 20 times)
-    simulateRoll20DiceSum();
+    // Gaussian distribution with a common dice (drawing 20 times then sum)
+    //simulateRoll20DiceSum();
 
     // Box-Muller
-    simulateBMDistribution();*/
+    //simulateBMDistribution();
     
 }
