@@ -7,6 +7,24 @@
 #include <math.h>
 
 /**
+ * @brief This function implements the density function of a gaussian's law
+ * 
+ * @param x Value of a random number
+ * @param mean Mean of the expected gaussian law
+ * @param stdDeviation Standard Deviation of the expected gaussian law
+ * 
+ * @return f(x)
+*/
+
+double gaussianDensityFunction(double x, double mean, double stdDeviation)
+{
+    double coefficient = 1. / (sqrt(2.0 * M_PI));
+    double exponent    = - (x*x)/2;
+    
+    return coefficient * exp(exponent);
+}
+
+/**
  * @brief Calculate the mean of simulation's values.
  * 
  * @param array Values of a simulation

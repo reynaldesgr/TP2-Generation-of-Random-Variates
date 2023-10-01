@@ -2,6 +2,8 @@
 #define __MATH_UTILITY__
 
 
+double gaussianDensityFunction          (double x, double mean, double stdDeviation);
+
 double calculateMean                    (double * array, int size);
 double calculateMeanInt                 (int * array, int size);
 double calculateStandardDeviation       (const double * array, int size, double mean);

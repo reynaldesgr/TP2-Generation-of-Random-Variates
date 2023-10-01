@@ -93,10 +93,10 @@ int main(void)
     double r;
 
     // Mean = 11
-    /*double mean = 11;
+    double mean = 11;
     double sum  = 0;
 
-    int test20bins1    [20] = {0};
+    /*int test20bins1    [20] = {0};
     double dataNegExp1 [1000];
 
     printf("\n -- NegExp (Drawing = 1000) -- \n");
@@ -126,7 +126,7 @@ int main(void)
     printf("\n -- Average (Drawing = 1000000) : %f \n", calculateMean(dataNegExp2, 1000000));*/
     
     // Mean = 10
-    double mean = 10;
+   /* double mean = 10;
     double sum  = 0;
 
     int test20bins3    [20] = {0};
@@ -141,12 +141,15 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins3, dataNegExp3, NUM_SIMULATIONS);
     
-    printf("\n -- Average (Drawing = 101000) : %f \n", calculateMean(dataNegExp3, NUM_SIMULATIONS));
+    printf("\n -- Average (Drawing = 101000) : %f \n", calculateMean(dataNegExp3, NUM_SIMULATIONS));*/
 
     // Gaussian distribution with a common dice (drawing 20 times then sum)
-    //simulateRoll20DiceSum();
+    simulateRoll20DiceSum();
 
     // Box-Muller
-    //simulateBMDistribution();*/
+    //simulateBMDistribution();
+
+    // Testing rejection
+    //testingRejection(10, 3);
     
 }

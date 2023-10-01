@@ -80,11 +80,28 @@ void boxMuller(double * x1, double * x2)
  * 
 */
 
-double genericRejectionBM(double * x1, double * x2, double minX, double maxX, double minY, double maxY)
+double genericRejection(double mean, double stdDeviation, double minX, double maxX, double minY, double maxY)
 {
-    do{
-        boxMuller(x1, x2);
-    }while (*x1 < minX | *x1 > maxX | *x2 > maxY | *x2 < minY);
+    double x, y;
+    double na1, na2;
+    do
+    {
+        boxMuller(&na1, &na2);
+        x   = minX + na1 * (maxX - minX);
+        y   = maxY * na2;
+        printf("y = %f \t|\t f(x) = %f\t=>\t ", y, gaussianDensityFunction(x, mean, stdDeviation));
+
+        if (y > gaussianDensityFunction(x, mean, stdDeviation ))
+        {
+            printf("Accepted \n");
+        }
+        else
+        {
+            printf("Rejected\n");
+        }
+
+    } while (y > gaussianDensityFunction(x, mean, stdDeviation ));
+
 }
 
 /**
@@ -191,7 +208,7 @@ void simulateRoll20DiceSum()
         sum           = 0;
     }
 
-    createHistogram(20, 120, 50, histogram, valuesDice, NUM_SIMULATIONS);
+    createHistogram(20, 120, 100, histogram, valuesDice, NUM_SIMULATIONS);
 }
 
 /**
@@ -213,13 +230,30 @@ void simulateBMDistribution()
     double      valuesBM      [NUM_SIMULATIONS];
     
     for (int i = 0; i < NUM_SIMULATIONS; i++) {
-        genericRejectionBM(&x1, &x2, -1, 1, -1, 1);
+        boxMuller(&x1, &x2);
         valuesBM[i] = x1;
     }
 
     createHistogram(MIN_X, MAX_X, NUM_BINS, histogram, valuesBM, NUM_SIMULATIONS);
-
 }
 
+
+/**
+ * @brief This function test the acceptance/rejection algorithm for a gaussian law
+ * 
+ * @param mean Mean of the gaussian law
+ * @param stdDeviation Standard deviation of the gaussian law
+ * 
+*/
+
+void testingRejection(double mean, double stdDeviation)
+{
+    double x1, x2;
+    double      valuesBM      [10];
+    
+    for (int i = 0; i < 10; i++) {
+        genericRejection(mean, stdDeviation, -1, 1, -1, 1);
+    }
+}
 
 

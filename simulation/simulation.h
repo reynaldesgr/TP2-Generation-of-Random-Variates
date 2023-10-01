@@ -27,5 +27,8 @@ int    simulateHDLClass           (const double * cumulativeArray, double indivi
 void   simulateRoll20DiceSum      (void);
 void   simulateBMDistribution     (void);
 
+// Testing
+void testingRejection             (double mean, double stdDeviation);
+
 
 #endif
