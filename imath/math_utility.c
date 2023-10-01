@@ -161,7 +161,10 @@ void createHistogram(double a, double b, int bins, int * histogram, double * dat
     for (int i = 0; i < sample; i++ )
     {
             index = (int) ((data[i] - a) / width);
-            histogram[index]++;
+            if (index > 0 && index < bins)
+            {
+                histogram[index]++;
+            }
     }
 
     printf("\n -- Histogram : -- \n");

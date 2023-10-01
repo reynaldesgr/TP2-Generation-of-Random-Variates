@@ -90,13 +90,13 @@ int main(void)
 
 
     // 4 - Reproduction of continuous distributions
-    double r;
+    /*double r;
 
     // Mean = 11
     double mean = 11;
     double sum  = 0;
 
-    /*int test20bins1    [20] = {0};
+    int test20bins1    [20] = {0};
     double dataNegExp1 [1000];
 
     printf("\n -- NegExp (Drawing = 1000) -- \n");
@@ -108,10 +108,12 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins1, dataNegExp1, 1000);
     
-    printf("\n -- Average (Drawing = 1000) : %f \n", calculateMean(dataNegExp1, 1000));*/
+    mean    = calculateMean(dataNegExp1, 1000);
+    printf("\n -- Average (Drawing = 1000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 1000) : %f", calculateStandardDeviation(dataNegExp1, 1000, mean));
 
 
-    /*int test20bins2    [20] = {0};
+    int test20bins2    [20] = {0};
     double dataNegExp2 [1000000];
 
     printf("\n -- NegExp (Drawing = 1000000) -- \n");
@@ -123,11 +125,14 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins2, dataNegExp2, 1000000);
     
-    printf("\n -- Average (Drawing = 1000000) : %f \n", calculateMean(dataNegExp2, 1000000));*/
+    mean    = calculateMean(dataNegExp1, 1000000);
+    printf("\n -- Average (Drawing = 1000000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 1000000) : %f", calculateStandardDeviation(dataNegExp2, 1000000, mean));
+
     
     // Mean = 10
-   /* double mean = 10;
-    double sum  = 0;
+    mean = 10;
+    sum  = 0;
 
     int test20bins3    [20] = {0};
     double dataNegExp3 [NUM_SIMULATIONS];
@@ -141,15 +146,17 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins3, dataNegExp3, NUM_SIMULATIONS);
     
-    printf("\n -- Average (Drawing = 101000) : %f \n", calculateMean(dataNegExp3, NUM_SIMULATIONS));*/
-
+    mean    = calculateMean(dataNegExp1, 101000);
+    printf("\n -- Average (Drawing = 101000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 101000) : %f", calculateStandardDeviation(dataNegExp3, 101000, mean));
+    */
     // Gaussian distribution with a common dice (drawing 20 times then sum)
-    simulateRoll20DiceSum();
+    //simulateRoll20DiceSum();
 
     // Box-Muller
     //simulateBMDistribution();
 
     // Testing rejection
-    //testingRejection(10, 3);
+    testingRejection(10, 3);
     
 }
