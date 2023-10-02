@@ -89,16 +89,17 @@ double genericRejection(double mean, double stdDeviation, double minX, double ma
         boxMuller(&na1, &na2);
         x   = minX + na1 * (maxX - minX);
         y   = maxY * na2;
-        printf("x = %f \t|\t \n | y = %f \t|\t f(x) = %f\t=>\t ", x, y, gaussianDensityFunction(x, mean, stdDeviation));
+        printf("(%f, %f)", x, y, gaussianDensityFunction(x, mean, stdDeviation));
 
-        if (y > gaussianDensityFunction(x, mean, stdDeviation ))
+        if (y <= gaussianDensityFunction(x, mean, stdDeviation ))
         {
-            printf("Accepted \n");
+            printf(" => Accepted");
         }
         else
         {
-            printf("Rejected\n");
+            printf(" => Rejected");
         }
+        printf("\n");
 
     } while (y > gaussianDensityFunction(x, mean, stdDeviation ));
 
@@ -251,7 +252,7 @@ void testingRejection(double mean, double stdDeviation)
     double x1, x2;
     double      valuesBM      [10];
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
         genericRejection(mean, stdDeviation, -1, 1, -1, 1);
     }
 }
