@@ -6,8 +6,7 @@
 #include "imath/math_utility.h"
 #include "display/display_utility.h"
 
-/* Testing functions */
-
+// Testing functions
 void test_uniform(double a, double b, int sample)
 {
     // Sample = 100000
@@ -96,7 +95,7 @@ int main(void)
     double mean = 11;
     double sum  = 0;
 
-    int test20bins1    [20] = {0};
+    int test20bins1    [NUM_SIMULATIONS] = {0};
     double dataNegExp1 [1000];
 
     printf("\n -- NegExp (Drawing = 1000) -- \n");
@@ -112,8 +111,7 @@ int main(void)
     printf("\n -- Average (Drawing = 1000) : %f \n", mean);
     printf("\n -- Standard deviation (Drawing = 1000) : %f", calculateStandardDeviation(dataNegExp1, 1000, mean));
 
-
-    int test20bins2    [20] = {0};
+    int test20bins2    [NUM_SIMULATIONS] = {0};
     double dataNegExp2 [1000000];
 
     printf("\n -- NegExp (Drawing = 1000000) -- \n");
@@ -129,12 +127,11 @@ int main(void)
     printf("\n -- Average (Drawing = 1000000) : %f \n", mean);
     printf("\n -- Standard deviation (Drawing = 1000000) : %f", calculateStandardDeviation(dataNegExp2, 1000000, mean));
 
-    
     // Mean = 10
     mean = 10;
     sum  = 0;
 
-    int test20bins3    [20] = {0};
+    int test20bins3    [NUM_SIMULATIONS] = {0};
     double dataNegExp3 [NUM_SIMULATIONS];
 
     printf("\n -- NegExp (Drawing = 101000) -- \n");
@@ -157,6 +154,6 @@ int main(void)
     //simulateBMDistribution();
 
     // Testing rejection
-    testingRejection(10, 3);
+    genericRejection(1000, 10, 3, -8, 8, 0, 1);
     
 }

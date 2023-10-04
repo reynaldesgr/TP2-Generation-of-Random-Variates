@@ -18,7 +18,6 @@ double uniform                  (double a, double b);
 double negExp                   (double mean);
 double randomIndividual         (void);
 void   boxMuller                (double * x1, double * x2);
-double genericRejectionBM       (double * x1, double * x2, double minX, double maxX, double minY, double maxY);
 
 // Simulation
 void   simulateClasses_1          (void);
@@ -26,9 +25,8 @@ void   simulateClassesBound       (double a, double b, int sizeSample, int drawi
 int    simulateHDLClass           (const double * cumulativeArray, double individualPSR);
 void   simulateRoll20DiceSum      (void);
 void   simulateBMDistribution     (void);
+void   genericRejection           (double numSimulation, double mean, double stdDeviation, double minX, double maxX, double minY, double maxY);
 
-// Testing
-void testingRejection             (double mean, double stdDeviation);
 
 
 #endif

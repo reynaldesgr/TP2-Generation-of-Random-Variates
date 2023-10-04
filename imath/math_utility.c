@@ -18,8 +18,8 @@
 
 double gaussianDensityFunction(double x, double mean, double stdDeviation)
 {
-    double coefficient = 1. / (sqrt(2.0 * M_PI));
-    double exponent    = - (x*x)/2;
+    double coefficient = 1. / stdDeviation * (sqrt(2.0 * M_PI));
+    double exponent    = - ((x*x) - stdDeviation)/(2 * (stdDeviation*stdDeviation));
     
     return coefficient * exp(exponent);
 }
