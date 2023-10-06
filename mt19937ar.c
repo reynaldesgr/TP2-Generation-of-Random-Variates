@@ -93,9 +93,8 @@ int main(void)
 
     // Mean = 11
     double mean = 11;
-    double sum  = 0;
 
-    int test20bins1    [NUM_SIMULATIONS] = {0};
+    int test20bins1    [40] = {0};
     double dataNegExp1 [1000];
 
     printf("\n -- NegExp (Drawing = 1000) -- \n");
@@ -109,12 +108,14 @@ int main(void)
     
     mean    = calculateMean(dataNegExp1, 1000);
     printf("\n -- Average (Drawing = 1000) : %f \n", mean);
-    printf("\n -- Standard deviation (Drawing = 1000) : %f", calculateStandardDeviation(dataNegExp1, 1000, mean));
 
-    int test20bins2    [NUM_SIMULATIONS] = {0};
-    double dataNegExp2 [1000000];
-
+    
+    int test20bins2    [40] = {0};
+    double *dataNegExp2 = (double *) malloc(1000000 * sizeof(double));
+    
     printf("\n -- NegExp (Drawing = 1000000) -- \n");
+    mean = 11;
+    
     for (int i = 0; i < 1000000; i++)
     {
         r              = negExp(mean);
@@ -123,15 +124,15 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins2, dataNegExp2, 1000000);
     
-    mean    = calculateMean(dataNegExp1, 1000000);
+    mean    = calculateMean(dataNegExp2, 1000000);
     printf("\n -- Average (Drawing = 1000000) : %f \n", mean);
-    printf("\n -- Standard deviation (Drawing = 1000000) : %f", calculateStandardDeviation(dataNegExp2, 1000000, mean));
 
+    free(dataNegExp2);
     // Mean = 10
-    mean = 10;
-    sum  = 0;
 
-    int test20bins3    [NUM_SIMULATIONS] = {0};
+    mean = 10;
+
+    int test20bins3    [40] = {0};
     double dataNegExp3 [NUM_SIMULATIONS];
 
     printf("\n -- NegExp (Drawing = 101000) -- \n");
@@ -143,17 +144,18 @@ int main(void)
 
     createHistogram(0, 20, 20, test20bins3, dataNegExp3, NUM_SIMULATIONS);
     
-    mean    = calculateMean(dataNegExp1, 101000);
+    mean    = calculateMean(dataNegExp3, 101000);
     printf("\n -- Average (Drawing = 101000) : %f \n", mean);
-    printf("\n -- Standard deviation (Drawing = 101000) : %f", calculateStandardDeviation(dataNegExp3, 101000, mean));
     
     // Gaussian distribution with a common dice (drawing 20 times then sum)
+    printf("\n -- Simulate a roll-dice (20 times) -- \n");
     simulateRoll20DiceSum();
 
+    printf("\n -- Box Muller -- \n");
     // Box-Muller
     simulateBMDistribution();
 
     // Testing rejection
-    genericRejection(1000, 10, 3, -8, 8, 0, 1);
-    
+    printf("\n -- Generic Rejection (Gaussian Law) -- \n"); 
+    //genericRejection(100, 10, 3, -8, 8, 0, 1);
 }
