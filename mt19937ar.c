@@ -41,16 +41,16 @@ int main(void)
 {
     
     // 1 - Matsumoto
-    //matsumoto_main();
+    matsumoto_main();
 
     // 2 - Generation of uniform random numbers between A and B
-    //test_uniform(-89.2, 56.7, 100000);
+    test_uniform(-89.2, 56.7, 100000);
     
     // 3 - Reproduction of discrete empirical distributions
-    //test_empirical_distributions();
+    test_empirical_distributions();
     
     // HDL Probabilities
-    /*double HDLcumulProbabilities[6];
+    double HDLcumulProbabilities[6];
     double HDLproba[6];
 
     printf("\n -- HDL Probabilities calculation -- \n");
@@ -85,11 +85,11 @@ int main(void)
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
         HDLSimulation[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);*/
+    displayClass(HDLSimulation, 6);
 
 
     // 4 - Reproduction of continuous distributions
-    /*double r;
+    double r;
 
     // Mean = 11
     double mean = 11;
@@ -146,12 +146,12 @@ int main(void)
     mean    = calculateMean(dataNegExp1, 101000);
     printf("\n -- Average (Drawing = 101000) : %f \n", mean);
     printf("\n -- Standard deviation (Drawing = 101000) : %f", calculateStandardDeviation(dataNegExp3, 101000, mean));
-    */
+    
     // Gaussian distribution with a common dice (drawing 20 times then sum)
-    //simulateRoll20DiceSum();
+    simulateRoll20DiceSum();
 
     // Box-Muller
-    //simulateBMDistribution();
+    simulateBMDistribution();
 
     // Testing rejection
     genericRejection(1000, 10, 3, -8, 8, 0, 1);
