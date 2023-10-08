@@ -198,6 +198,6 @@ int main(void)
     simulateBMDistribution();
 
     // BONUS : Testing rejection
-    printf("\n -- Generic Rejection (Gaussian Law) -- \n"); 
+    //printf("\n -- Generic Rejection (Gaussian Law) -- \n"); 
     //genericRejection(100, 10, 3, -8, 8, 0, 1);
 }
