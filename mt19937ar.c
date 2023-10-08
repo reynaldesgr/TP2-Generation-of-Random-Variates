@@ -71,6 +71,10 @@ int main(void)
     matsumoto_main();
 
     // 2 - Generation of uniform random numbers between A and B
+    // Sample = 1000
+    test_uniform(-89.2, 56.7, 1000);
+
+    // Sample = 100000
     test_uniform(-89.2, 56.7, 100000);
     
     // 3 - Reproduction of discrete empirical distributions

@@ -170,7 +170,7 @@ void simulateRoll20DiceSum()
     int sum                             = 0;
     double sum_of_squares               = 0.0;
 
-    int    histogram [NUM_BINS]         = {0};
+    int    histogram [101]              = {0};
     double valuesDice[NUM_SIMULATIONS];
 
     // Simulate the experiment 'NUM_SIMULATIONS' times
