@@ -7,7 +7,10 @@
 
 
 // Bound for X & Y (Box-Muller)
+
+// Change here to try with 1000 000 simulations
 #define NUM_SIMULATIONS_BM 1000
+
 #define MIN_X -1.0
 #define MAX_X 1.0
 

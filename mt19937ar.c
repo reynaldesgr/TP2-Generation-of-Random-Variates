@@ -106,24 +106,25 @@ int main(void)
     printf("\n -- HDL Simulation (Sample = 1000) -- \n");
     double individualPSR;
     int individualClass = 0;
-    int HDLSimulation[6] = {0};
+    int HDLSimulation1[6] = {0};
 
     for (int i = 0; i < 1000; i++)
     {
         individualPSR = randomIndividual();
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
-        HDLSimulation[individualClass]++;
+        HDLSimulation1[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);
+    displayClass(HDLSimulation1, 6);
 
+    int HDLSimulation2[6] = {0};
     printf("\n -- HDL Simulation (Sample = 1000000) -- \n");
     for (int i = 0; i < 1000000; i++)
     {
         individualPSR = randomIndividual();
         individualClass = simulateHDLClass(HDLcumulProbabilities, individualPSR);
-        HDLSimulation[individualClass]++;
+        HDLSimulation2[individualClass]++;
     }
-    displayClass(HDLSimulation, 6);
+    displayClass(HDLSimulation2, 6);
 
 
     // 4 - Reproduction of continuous distributions
