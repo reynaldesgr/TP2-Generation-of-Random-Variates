@@ -52,9 +52,9 @@ void test_uniform(double a, double b, int sample)
  * 
  */
 
-void test_empirical_distributions()
+void test_empirical_distributions(int drawings)
 {
-    simulateClasses1();
+    simulateClasses1(drawings);
 }
 
 
@@ -72,13 +72,20 @@ int main(void)
 
     // 2 - Generation of uniform random numbers between A and B
     // Sample = 1000
+    printf("\n -- Sample = 1000 \n");
     test_uniform(-89.2, 56.7, 1000);
 
     // Sample = 100000
+    printf("\n -- Sample = 1000000 \n");
     test_uniform(-89.2, 56.7, 100000);
     
     // 3 - Reproduction of discrete empirical distributions
-    test_empirical_distributions();
+
+    // Drawing = 1000
+    test_empirical_distributions(1000);
+
+    // Drawing = 1000 000
+    test_empirical_distributions(1000000);
     
     // HDL Probabilities
     double HDLcumulProbabilities[6];

@@ -21,7 +21,7 @@ double randomIndividual         (void);
 void   boxMuller                (double * x1, double * x2);
 
 // Simulation
-void   simulateClasses1           (void);
+void   simulateClasses1           (int drawings);
 void   simulateClassesBound       (double a, double b, int sizeSample, int drawings, int numberClasses);
 int    simulateHDLClass           (const double * cumulativeArray, double individualPSR);
 void   simulateRoll20DiceSum      (void);

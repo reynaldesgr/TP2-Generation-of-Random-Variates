@@ -82,15 +82,17 @@ double randomIndividual()
  * This function simulates classes based on randomIndividual() values and calculates
  * the probabilities of three classes (classA, classB, and classC) within a given
  * number of drawings. The probabilities are then displayed using displayArray().
+ * 
+ * @param drawings Number of drawings expected.
+ * 
  */
 
-void simulateClasses1()
+void simulateClasses1(int drawings)
 {
     double classA   = 0;
     double classB   = 0;
     double classC   = 0;
 
-    int    drawings = 1000;
     int    i;
     double individual;
 
