@@ -197,7 +197,7 @@ int main(void)
     // Box-Muller
     simulateBMDistribution();
 
-    // Testing rejection
+    // BONUS : Testing rejection
     printf("\n -- Generic Rejection (Gaussian Law) -- \n"); 
-    genericRejection(100, 10, 3, -8, 8, 0, 1);
+    //genericRejection(100, 10, 3, -8, 8, 0, 1);
 }
