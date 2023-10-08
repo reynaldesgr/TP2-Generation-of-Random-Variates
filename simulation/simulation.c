@@ -15,13 +15,13 @@
 #include "../mt/matsumoto.h"
 
 /**
- * @brief This function return a pseudo-random number between a and b : [a, b]
+ * @brief Generate a pseudo-random number between a and b: [a, b].
  * 
- * @param a lower bound (minimum value that the random number can take)
- * @param b upper bound (maximum value that the random number can take)
+ * @param a Lower bound (minimum value that the random number can take).
+ * @param b Upper bound (maximum value that the random number can take).
  * 
- * @return r : a pseudo-random number 
-*/
+ * @return A pseudo-random number in the specified range [a, b].
+ */
 
 double uniform(double a, double b)
 {
@@ -32,12 +32,12 @@ double uniform(double a, double b)
 
 
 /**
- * @brief This function implements the Poisson's Law based on the mathematical definition.
+ * @brief Generate a random number following the exponential negative distribution.
  * 
- * @param m values average of points
+ * @param mean Mean of the distribution.
  * 
- * @return r : a pseudo-random number
-*/
+ * @return A random number following the exponential negative distribution.
+ */
 
 double negExp(double mean)
 {
@@ -46,13 +46,12 @@ double negExp(double mean)
 }
 
 /**
- * @brief This function generates numbers following the standard normal distribution
- * N(0,1) using Box-Muller method
+ * @brief Generate two random numbers following the standard normal distribution (N(0,1))
+ *        using the Box-Muller method.
  * 
- * @param x1 First gaussian variable
- * @param x2 Second gaussian variable
- *
-*/
+ * @param x1 Pointer to store the first Gaussian variable.
+ * @param x2 Pointer to store the second Gaussian variable.
+ */
 
 void boxMuller(double * x1, double * x2)
 {
@@ -66,22 +65,26 @@ void boxMuller(double * x1, double * x2)
 
 
 /**
- * @brief This function return a random number between [0, 1]
+ * @brief Generate a random number between [0, 1].
  * 
- * @return a random number between [0, 1]
-*/
+ * @return A random number between [0, 1].
+ */
 
 double randomIndividual()
 {
     return genrand_real1();
 }
 
-/**
- * @brief This function is used to answer part 3
- * 3 - Reproduction of discrete empirical distributions
-*/
 
-void simulateClasses_1()
+/**
+ * @brief Simulate classes and calculate their probabilities.
+ * 
+ * This function simulates classes based on randomIndividual() values and calculates
+ * the probabilities of three classes (classA, classB, and classC) within a given
+ * number of drawings. The probabilities are then displayed using displayArray().
+ */
+
+void simulateClasses1()
 {
     double classA   = 0;
     double classB   = 0;
@@ -91,59 +94,73 @@ void simulateClasses_1()
     int    i;
     double individual;
 
+    // Array to store class probabilities
     double array[3] = {0};
 
     for (i = 0; i <= drawings; i++)
     {
+        // Generate a random individual
         individual = randomIndividual();
 
         if (individual < 0.5)
         {
-            classA++;
+            classA++; // Count class A
         }
         else if (individual >= 0.5 && individual < 0.65)
         {
-            classB++;
+            classB++; // Count class B
         }
         else
         {
-            classC++;
+            classC++; // Count class C
         }    
     }
 
-    // 
+    // Calculate class A, B, C probabilities
     array[0]    = classA / drawings;
     array[1]    = array[0] + (classB / drawings);
     array[2]    = array[1] + (classC / drawings);
 
+    // Display class probabilities
     displayArray(array, 3);
 }
 
 
 /**
- * @brief This function simulate a PSR result of a individual 
- * for the HDL 'good' cholesterol study.
+ * @brief Simulate an HDL cholesterol class based on individual PSR.
  * 
- * @return The individual's class
-*/
+ * This function simulates an individual's class for HDL 'good' cholesterol study
+ * based on their individual PSR (Percentile Score Rank) and the cumulative array
+ * of probabilities for each class.
+ * 
+ * @param cumulativeArray An array of cumulative probabilities for each class.
+ * @param individualPSR The individual's PSR (Percentile Score Rank).
+ * 
+ * @return The individual's class.
+ */
 
 int simulateHDLClass(const double * cumulativeArray, double individualPSR)
 {
     int    i;
-    i   = 0;
+
+    i       = 0;
+
+    // Find the class based on individual PSR using CDF
     while (individualPSR > cumulativeArray[i])
     {
         i++;
     }
+
     return i; 
-   //printf("\n HDL Results : individual is class %d with a psr at %f. \n", i+1, individualPSR);
 }
 
 /**
- * @brief This function performs a roll dice and sum the
- * result 20 times and display a histogram of the results.
- * It also display the mean and standard deviation of a simulation.
-*/
+ * @brief Simulate rolling a six-sided dice 20 times and summing the results.
+ * 
+ * This function simulates rolling a six-sided dice 20 times and summing the results.
+ * It also displays a histogram of the results, as well as the mean and standard deviation
+ * of the simulation.
+ */
 
 void simulateRoll20DiceSum()
 {
@@ -172,10 +189,12 @@ void simulateRoll20DiceSum()
     createHistogram(20, 120, 100, histogram, valuesDice, NUM_SIMULATIONS);
 }
 
+
 /**
- * @brief This function test NUM_SIMULATION times the Box Muller function 
- * to generate numbers around 0 following N(0,1). 
-*/
+ * @brief Simulate the Box-Muller distribution.
+ * 
+ * This function simulates the Box-Muller distribution and displays a histogram of the results.
+ */
 
 void simulateBMDistribution()
 {
@@ -186,36 +205,43 @@ void simulateBMDistribution()
     double  x1;
     double  x2;
 
-    double meanBM = 0.;
-    int         histogram     [NUM_BINS];
-    double      valuesBM      [NUM_SIMULATIONS];
+    double          meanBM                  = 0.;
+    int             histogram[NUM_BINS];
+    double      *   valuesBM                = malloc(2*NUM_SIMULATIONS_BM*sizeof(double));
     
-    for (int i = 0; i < NUM_SIMULATIONS; i++) {
+    int i;
+
+    for (i = 0; i < 2 * NUM_SIMULATIONS_BM; i++) 
+    {
+        // Generate pairs of Gaussian random numbers
         boxMuller(&x1, &x2);
         valuesBM[i] = x1;
+        i++;
+        valuesBM[i] = x2;  
     }
 
-    createHistogram(MIN_X, MAX_X, NUM_BINS, histogram, valuesBM, NUM_SIMULATIONS);
+    // Create a histogram of the generated values
+    createHistogram(MIN_X, MAX_X, NUM_BINS, histogram, valuesBM, 2 * NUM_SIMULATIONS_BM);
+    // Free memory allocated for values
+    free(valuesBM);
 }
 
 
 /**
- * @brief This function use the Box-Muller method to generate pairs
- * of Gaussian random numbers (standard normal distribution) while 
- * performing a rejection step
+ * @brief Simulate a random variable using rejection/acceptance method.
  * 
- * @param numSimulation Number of simulation expected 
+ * This function uses the density function of a Gaussian law while performing a rejection step based on the desired
+ * mean and standard deviation.
  * 
- * @param x1 First gaussian variables generated by BM algorithm
- * @param x2 Second gaussian variables generated by BM algorithm
- *
- * @param minX Lower-bound for x1
- * @param maxX Upper-bound for x1
+ * @param numSimulation Number of simulations to perform.
+ * @param mean Mean of the distribution.
+ * @param stdDeviation Standard deviation of the distribution.
+ * @param minX Lower-bound for the first Gaussian variable.
+ * @param maxX Upper-bound for the first Gaussian variable.
+ * @param minY Lower-bound for the second Gaussian variable.
+ * @param maxY Upper-bound for the second Gaussian variable.
  * 
- * @param minY Lower-bound for x2
- * @param maxY Upper-bound for x2
- * 
-*/
+ */
 
 void genericRejection(double numSimulation, double mean, double stdDeviation, double minX, double maxX, double minY, double maxY)
 {
@@ -225,8 +251,11 @@ void genericRejection(double numSimulation, double mean, double stdDeviation, do
         double na1, na2;
         do
         {
+            // Generate two random number between [0, 1]
             na1 = genrand_real1();
             na2 = genrand_real1();
+
+            // Scale the random numbers to the desired range
             x   = minX + na1 * (maxX - minX);
             y   = maxY * na2;
 
@@ -241,7 +270,8 @@ void genericRejection(double numSimulation, double mean, double stdDeviation, do
             {
                 printf("(%f, %f) \t==>\t Rejected\n", x, y);
             }
-        } while (y > f);
+
+        } while (y > f); // Continue until a valid value is accepted
     }
 }
 

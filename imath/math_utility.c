@@ -7,14 +7,16 @@
 #include <math.h>
 
 /**
- * @brief This function implements the density function of a gaussian's law
+ * @brief This function implements the density function of a Gaussian distribution.
  * 
- * @param x Value of a random number
- * @param mean Mean of the expected gaussian law
- * @param stdDeviation Standard Deviation of the expected gaussian law
+ * This function calculates the value of the Gaussian density function (PDF) at a given point 'x'.
  * 
- * @return f(x)
-*/
+ * @param x The value at which to calculate the PDF.
+ * @param mean The mean of the Gaussian distribution.
+ * @param stdDeviation The standard deviation of the Gaussian distribution.
+ * 
+ * @return The value of the Gaussian density function at 'x' (f(x)).
+ */
 
 double gaussianDensityFunction(double x, double mean, double stdDeviation)
 {
@@ -25,14 +27,15 @@ double gaussianDensityFunction(double x, double mean, double stdDeviation)
 }
 
 /**
- * @brief Calculate the mean of simulation's values.
+ * @brief Calculate the mean of an array of values.
  * 
- * @param array Values of a simulation
- * @param size Size of the simulation/Number of experiments
+ * This function calculates the mean of a given array of values.
  * 
- * @return Mean of simulation's values
+ * @param array The array of values.
+ * @param size The size of the array.
  * 
-*/
+ * @return The mean of the values in the array.
+ */
 
 double calculateMean(double * array, int size)
 {
@@ -48,17 +51,18 @@ double calculateMean(double * array, int size)
 }
 
 /**
- * @brief Calcule the standard deviation of simulation's values.
+ * @brief Calculate the standard deviation of an array of values.
  * 
- * @param array Values of a simulation
- * @param size Size of the simulation/Number of experiments
- * @param mean Mean of simulation's values
+ * This function calculates the standard deviation of a given array of values.
  * 
- * @return Standard deviation of simulation's values
+ * @param array The array of values.
+ * @param size The size of the array.
+ * @param mean The mean of the values in the array.
  * 
-*/
+ * @return The standard deviation of the values in the array.
+ */
 
-double calculateStandardDeviation(const int * array, int size, double mean)
+double calculateStandardDeviation(const double * array, int size, double mean)
 {
     double sumSquare = 0.0;
 
@@ -71,6 +75,18 @@ double calculateStandardDeviation(const int * array, int size, double mean)
     return sqrt(sumSquare / size);
 }
 
+
+/**
+ * @brief Calculate the standard deviation of an array of integer values.
+ * 
+ * This function calculates the standard deviation of a given array of integer values.
+ * 
+ * @param array The array of integer values.
+ * @param size The size of the array.
+ * @param mean The mean of the integer values in the array.
+ * 
+ * @return The standard deviation of the integer values in the array.
+ */
 
 double calculateStandardDeviationInt(const int * array, int size, double mean)
 {
@@ -85,6 +101,18 @@ double calculateStandardDeviationInt(const int * array, int size, double mean)
     return sqrt(sumSquare / size);
 }
 
+
+/**
+ * @brief Calculate the mean of an array of integer values.
+ * 
+ * This function calculates the mean of a given array of integer values.
+ * 
+ * @param array The array of integer values.
+ * @param size The size of the array.
+ * 
+ * @return The mean of the integer values in the array.
+ */
+
 double calculateMeanInt(int * array, int size)
 {
     int sum = 0;
@@ -98,15 +126,16 @@ double calculateMeanInt(int * array, int size)
 }
 
 /**
- * @brief This function compute the probability array of being in each class.
- * ( 3 - Reproduction of discrete empirical distributions)
+ * @brief Calculate the probabilities for discrete empirical distributions.
  * 
- * @param array Array of the number of individual of each class
- * @param probability Array of the probability of being in a class
- * @param size Size of array / Number of class
- * @param sizeSample Size of a sample : ex. : [40..45] is size 5
+ * This function computes the probabilities for each class in a discrete empirical distribution
+ * based on the counts of individuals in each class and the total sample size.
  * 
-*/
+ * @param array Array of the number of individuals in each class.
+ * @param probability Array to store the computed probabilities.
+ * @param size Size of the arrays (number of classes).
+ * @param sizeSample Size of the sample (total number of individuals).
+ */
 
 void calculateProbabilities(const double * array, double * probability, int size, int sizeSample)
 {
@@ -118,13 +147,16 @@ void calculateProbabilities(const double * array, double * probability, int size
 }
 
 /**
- * @brief This function compute a array giving the cumulative probabilities of being
- * in each class.
+ * @brief Calculate the cumulative probabilities for discrete empirical distributions.
  * 
- * @param probaArray Array of the probability of being in a class
- * @param cumulativeArray Array of the cumulative probability
- * @param size Number of class
-*/
+ * This function computes the cumulative probabilities for each class in a discrete empirical distribution
+ * based on the probabilities of each class.
+ * 
+ * @param probaArray Array of the probabilities for each class.
+ * @param cumulativeArray Array to store the computed cumulative probabilities.
+ * @param size Number of classes.
+ */
+
 void calculateCumulativeProbabilities(const double * probaArray, double * cumulativeArray, int numberClass)
 {
     cumulativeArray[0] = probaArray[0];
@@ -135,18 +167,19 @@ void calculateCumulativeProbabilities(const double * probaArray, double * cumula
     }
 }
 
+
 /**
- * @brief This function creates a histogram from a data array by specifying the interval
- *  [a, b], the number of bins, and the histogram array to store the results
- *
- * @param a Lower bound of the interval
- * @param b Upper bound of the interval
+ * @brief Create a histogram from data.
  * 
- * @param bins Number of bins (bars) in the histogram
- * @param histogram Array where the histogram will be stored
- * @param data Data array from which the histogram will be constructed
- * @param sample Size of the sample 
+ * This function creates a histogram from a given data array by specifying the interval [a, b],
+ * the number of bins, and the histogram array to store the results.
  * 
+ * @param a Lower bound of the interval.
+ * @param b Upper bound of the interval.
+ * @param bins Number of bins (bars) in the histogram.
+ * @param histogram Array where the histogram will be stored.
+ * @param data Data array from which the histogram will be constructed.
+ * @param sample Size of the sample (number of data points).
  */
 
 void createHistogram(double a, double b, int bins, int * histogram, double * data, int sample)
@@ -160,12 +193,10 @@ void createHistogram(double a, double b, int bins, int * histogram, double * dat
 
     for (int i = 0; i < sample; i++ )
     {
-    
-        index = (int) ((data[i] - a) / width);
-        
-        if (index >= 0 && index < bins)
+        if (data[i] >= a && data[i] <= b)
         {
-                histogram[index]++;
+            index = (int) ((data[i] - a) / width);
+            histogram[index]++;
         }
     }
 

@@ -7,6 +7,7 @@
 
 
 // Bound for X & Y (Box-Muller)
+#define NUM_SIMULATIONS_BM 1000
 #define MIN_X -1.0
 #define MAX_X 1.0
 
@@ -20,7 +21,7 @@ double randomIndividual         (void);
 void   boxMuller                (double * x1, double * x2);
 
 // Simulation
-void   simulateClasses_1          (void);
+void   simulateClasses1           (void);
 void   simulateClassesBound       (double a, double b, int sizeSample, int drawings, int numberClasses);
 int    simulateHDLClass           (const double * cumulativeArray, double individualPSR);
 void   simulateRoll20DiceSum      (void);

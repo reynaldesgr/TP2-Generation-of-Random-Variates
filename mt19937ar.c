@@ -6,18 +6,29 @@
 #include "imath/math_utility.h"
 #include "display/display_utility.h"
 
-// Testing functions
+/**
+ * @brief Test the generation of uniform random numbers using uniform().
+ *
+ * This function generates a sample of random numbers uniformly distributed in the
+ * interval [a, b] and calculates statistics on these values, such as the mean and
+ * standard deviation. The results are displayed to the console.
+ *
+ * @param a Lower bound of the interval.
+ * @param b Upper bound of the interval.
+ * @param sample Number of random numbers to generate.
+ * 
+ */
+
 void test_uniform(double a, double b, int sample)
 {
-    // Sample = 100000
     double mean;
     double array[sample];
     int    size;
 
     size = (int) (b - a);
 
-    int histogram[size];
-    int bins = 10;
+    int    histogram[size];
+    int    bins = 10;
 
     printf("\n -- Test uniform --\n");
     for (int i = 0; i < sample; i++)
@@ -31,11 +42,27 @@ void test_uniform(double a, double b, int sample)
 
 }
 
+
+/**
+ * @brief Test empirical distributions using simulateClasses1().
+ *
+ * This function serves as a test function to demonstrate the use of the
+ * simulateClasses1() function, which simulates and calculates the probabilities
+ * of different classes A, B and C. 
+ * 
+ */
+
 void test_empirical_distributions()
 {
-    simulateClasses_1();
+    simulateClasses1();
 }
 
+
+
+
+/**
+ * @brief The main function.
+ */
 
 int main(void)
 {
@@ -108,6 +135,7 @@ int main(void)
     
     mean    = calculateMean(dataNegExp1, 1000);
     printf("\n -- Average (Drawing = 1000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 1000) : %f \n", calculateStandardDeviation(dataNegExp1, 1000, mean));
 
     
     int test20bins2    [40] = {0};
@@ -126,8 +154,10 @@ int main(void)
     
     mean    = calculateMean(dataNegExp2, 1000000);
     printf("\n -- Average (Drawing = 1000000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 1000000) : %f \n", calculateStandardDeviation(dataNegExp2, 1000000, mean));
 
     free(dataNegExp2);
+
     // Mean = 10
 
     mean = 10;
@@ -146,6 +176,7 @@ int main(void)
     
     mean    = calculateMean(dataNegExp3, 101000);
     printf("\n -- Average (Drawing = 101000) : %f \n", mean);
+    printf("\n -- Standard deviation (Drawing = 101000) : %f \n", calculateStandardDeviation(dataNegExp3, 101000, mean));
     
     // Gaussian distribution with a common dice (drawing 20 times then sum)
     printf("\n -- Simulate a roll-dice (20 times) -- \n");
@@ -157,5 +188,5 @@ int main(void)
 
     // Testing rejection
     printf("\n -- Generic Rejection (Gaussian Law) -- \n"); 
-    //genericRejection(100, 10, 3, -8, 8, 0, 1);
+    genericRejection(100, 10, 3, -8, 8, 0, 1);
 }
